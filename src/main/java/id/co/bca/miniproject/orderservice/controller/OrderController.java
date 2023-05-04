@@ -23,7 +23,7 @@ public class OrderController {
         return orderService.findAllOrder();
     }
 
-    @GetMapping("/product")
+    @GetMapping("/order")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody Order findByProductId(@RequestParam("id") Integer id) {
         return orderService.findOrderById(id);
