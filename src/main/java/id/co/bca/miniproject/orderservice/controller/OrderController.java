@@ -3,6 +3,8 @@ package id.co.bca.miniproject.orderservice.controller;
 import id.co.bca.miniproject.orderservice.dto.OrderDTO;
 import id.co.bca.miniproject.orderservice.model.Order;
 import id.co.bca.miniproject.orderservice.service.OrderService;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -31,8 +33,13 @@ public class OrderController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody Object createProduct(@RequestBody OrderDTO orderDTO) {
-        return orderService.create(orderDTO);
+    public @ResponseBody Object createProduct(ServletRequest servletRequest, @RequestBody OrderDTO orderDTO ) {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        try {
+            return orderService.create(orderDTO);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @PutMapping("/update")

@@ -29,6 +29,11 @@ public class KafkaConfiguration {
     }
 
     @Bean
+    public NewTopic productTopic() {
+        return TopicBuilder.name("updateStock").build();
+    }
+
+    @Bean
     public ProducerFactory<String, String> producerFactory() {
         Map<String, Object> properties = new HashMap<>();
         properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);

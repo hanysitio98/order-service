@@ -17,6 +17,9 @@ public final class ProducerService {
     @Autowired
     private NewTopic newTopic;
 
+    @Autowired
+    private NewTopic productTopic;
+
     public ProducerService(KafkaTemplate<String, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
@@ -24,4 +27,9 @@ public final class ProducerService {
     public void sendMessage(String message) {
         kafkaTemplate.send(newTopic.name(), message);
     }
+
+    public void sendStock(String message) {
+        kafkaTemplate.send(productTopic.name(), message);
+    }
+
 }
