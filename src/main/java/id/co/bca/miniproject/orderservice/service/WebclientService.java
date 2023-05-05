@@ -18,8 +18,8 @@ public class WebclientService {
 
     String productUrl = "http://localhost:8081";
 
-    public Product getProductData(Integer productId) {
-        ResponseEntity<Product> response = restTemplate.exchange(productUrl + "/product?id={id}", HttpMethod.GET, null, Product.class, productId);
+    public Product getProductData(Integer id) {
+        ResponseEntity<Product> response = restTemplate.exchange(productUrl + "/product/product?id={id}", HttpMethod.GET, null, Product.class, id);
         return response.getBody();
     }
 }

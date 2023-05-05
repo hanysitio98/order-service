@@ -28,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
     ProducerService producer;
 
     @Override
-    public Order create(OrderDTO orderDTO) {
-//        Product product = webclient.getProductData(productId);
+    public Order create(OrderDTO orderDTO, Integer productId ) {
+        Product product = webclient.getProductData(productId);
 
         Order model = new Order();
         model.setSellerId(orderDTO.getSellerId());
@@ -39,16 +39,16 @@ public class OrderServiceImpl implements OrderService {
         model.setTotalPrice(orderDTO.getTotalPrice());
         model.setPaymentType(orderDTO.getPaymentType());
         model.setTransactionStatus(orderDTO.getTransactionStatus());
-//
-//        if (product == null ) {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid Product!");
-//        }
-//
-//        if (product.getStockQuantity() < orderDTO.getTransactionQuantity()) {
-//            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Insufficient Stock!");
-//        } else {
-//            producer.sendStock(model.getTransactionQuantity().toString());
-//        }
+
+        if (product == null ) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid Product!");
+        }
+
+        if (product.getStockQuantity() < orderDTO.getTransactionQuantity()) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Insufficient Stock!");
+        } else {
+            producer.sendStock(model.getTransactionQuantity().toString());
+        }
 
         if (model.getTransactionStatus().equals("Completed")) {
             TransferDTO transferDTO = new TransferDTO(model.getProductId(), model.getTransactionQuantity());

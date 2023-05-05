@@ -36,7 +36,7 @@ public class OrderController {
     public @ResponseBody Object createProduct(ServletRequest servletRequest, @RequestBody OrderDTO orderDTO ) {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         try {
-            return orderService.create(orderDTO);
+            return orderService.create(orderDTO, Integer.parseInt(request.getHeader("product")));
         } catch (Exception e) {
             throw e;
         }

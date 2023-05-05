@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    Order create(OrderDTO orderDTO);
+    Order create(OrderDTO orderDTO, Integer productId);
     Order update(OrderDTO orderDTO, Integer orderId);
     String delete(Integer orderId);
     Order findOrderById(Integer orderId);
